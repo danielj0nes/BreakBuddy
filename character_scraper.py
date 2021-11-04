@@ -1,14 +1,35 @@
 """
-BreakBuddy
+BreakBuddy Asset Scraper
 Daniel G. Jones
 Script to scrape animated character resources for custom character creation in the app
-Credit to https://maplestory.io/ and Nexon
+Credit to https://maplestory.io/ and Nexon Co., Ltd. for all assets
+For non-commercial use only
 """
-
 import requests
 
+# All number IDs are arbitrary, I used https://maples.im/ to obtain them graphically
+# Skin tone ranges (generic, upper/lower)
+st1r = [2000, 2001]
+st2r = [12000, 12001]
+# Hair colour values, add to default hair ID to obtain specific colour
+colours = {0: "black", 3: "blonde", 7: "brown"}
+# Different types of emotes, order corresponds to focus levels
+emotes = ["default", "hit", "oops", "hum"]
+# Male character values
+m_shoes = [1072187, 1073308, 1073444]
+m_lower = [1062067, 1060114, 1061145]
+m_upper = [1042036, 1042001, 1041143]
+m_hair = [30020, 30030, 30120, 30400]
+m_face = [20000, 20001, 20002]
+# Female character values
+f_shoes = [1072758, 1073008, 1072577]
+f_lower = [1062066, 1062182, 1062220]
+f_upper = [1042132, 1042408, 1042023]
+f_hair = [31000, 30960, 30920]
+f_face = [21000, 21001, 21002]
+
 # Generic request URL builder
-def build_request(skin_tone1, skin_tone2, shoes, lower, upper, hair, face, animated=False):
+def build_request(skin_tone1, skin_tone2, shoes, lower, upper, hair, face, emote, animated=False):
     default = """https://maplestory.io/api/character/"""
     default += """{"itemId":"""+str(skin_tone1)+""","version":"227"},"""
     default += """{"itemId":"""+str(skin_tone2)+""","version":"227"},"""
@@ -16,48 +37,55 @@ def build_request(skin_tone1, skin_tone2, shoes, lower, upper, hair, face, anima
     default += """{"itemId":"""+str(lower)+""","version":"227"},"""
     default += """{"itemId":"""+str(upper)+""","version":"227"},"""
     default += """{"itemId":"""+str(hair)+""","version":"227"},"""
-    default += """{"itemId":"""+str(face)+""","version":"227"}"""
+    default += """{"itemId":"""+str(face)
+    default += ""","animationName":'"""+emote+"""',"version":"227"}/stand1/"""
     if animated:
-        default += "/stand1/animated"
-    else:
-        default += "/stand1/"
+        default += "animated"
     default += "?showears=false&showLefEars=false&showHighLefEars=undefined&resize=1&name=&flipX=false&bgColor=0,0,0,0"
     return default
 
-# All number IDs are arbitrary, I used https://maples.im/ to obtain them graphically
+# Obtain all assets for a character (a necessary unschönheit)
+def get_assets(skin_tone1, skin_tone2, shoes, lower_body, upper_body, hair_style, face_style, male=True):
+    count = 0 
+    for skin in range(len(skin_tone1)):
+        for hair in range(len(hair_style)):
+            for colour in colours:
+                for face in range(len(face_style)):
+                    for shoe in range(len(shoes)):
+                        for lower in range(len(lower_body)):
+                            for upper in range(len(upper_body)):
+                                for emote in range(len(emotes)):
+                                    url = build_request(skin_tone1[skin], skin_tone2[skin], shoes[shoe], lower_body[lower], upper_body[upper], hair_style[hair]+colour, face_style[face], emotes[emote], animated=True)
+                                    response = requests.get(url)
+                                    if male:
+                                        with open(f"character_resources/male/male_skin{skin}_hair{hair}_{colours[colour]}_face{face}_shoes{shoe}_lower{lower}_upper{upper}_emote{emote}.gif", "wb") as f:
+                                            f.write(response.content)
+                                            count += 1
+                                    else:
+                                        with open(f"character_resources/female/female_skin{skin}_hair{hair}_{colours[colour]}_face{face}_shoes{shoe}_lower{lower}_upper{upper}_emote{emote}.gif", "wb") as f:
+                                            f.write(response.content)
+                                            count += 1
+                                    print(f"{count} / 7776 assets downloaded")
 
-# Skin tone ranges (generic, upper/lower)
-st1r = [2000, 2001, 2002, 2003, 2011]
-st2r = [12000, 12001, 12002, 12003, 12011]
+# Get a specific asset (for fixing broken assets)
+def get_asset(skin_tone1, skin_tone2, shoe, lower_body, upper_body, hair_style, face_style, emote, name, male=True):
+    url = build_request(skin_tone1, skin_tone2, shoe, lower_body, upper_body, hair_style, face_style, emote, animated=True)
+    response = requests.get(url)
+    if male:
+        with open(f"character_resources/male/{name}", "wb") as f:
+            f.write(response.content)
+    else:
+        with open(f"character_resources/female/{name}", "wb") as f:
+            f.write(response.content)
 
-# Female character values
-f_shoes = 1072758
-f_lower = 1062066
-f_upper = 1042132
-f_hair = 34220
-f_face = 50179
+# Fix a broken asset
+def fix_asset(save_name):
+    # Update to match corresponding file, where numbers = index
+    get_asset(st1r[0], st2r[0], m_shoes[2], m_lower[1], m_upper[1], m_hair[3], m_face[0], emotes[3], save_name)
+# fix_asset("male_skin0_hair3_black_face0_shoes2_lower1_upper1_emote3.gif") # Example
 
-# Male character values
-m_shoes = 1072369
-m_lower = 1062067
-m_upper = 1042037
-m_hair = [30660, 30020, 30030, 30050, 30120, 30810, 30450, 31070, 30240]
-m_face = [20000, 20001, 20002, 20003, 20004, 20005, 20008]
-
-# Testing
-
-# Female
-# url = build_request(st1r[i], st2r[i], f_shoes, f_lower, f_upper, f_hair, f_face)
-
-# Male
-for skin in range(len(st1r)):
-    for hair in range(len(m_hair)):
-        for face in range(len(m_face)):
-            url = build_request(st1r[skin], st2r[skin], m_shoes, m_lower, m_upper, m_hair[hair], m_face[face])
-            response = requests.get(url)
-            with open(f"character_resources/male_skin{skin}_hair{hair}_face{face}.png", "wb") as f:
-                f.write(response.content)
-    
-    # url = build_request(st1r[i], st2r[i], m_shoes, m_lower, m_upper, m_hair[i], m_face[i])
-    
-    
+if __name__ == "__main__":
+    # Male assets
+    # get_assets(st1r, st2r, m_shoes, m_lower, m_upper, m_hair, m_face)
+    # Female assets
+    get_assets(st1r, st2r, f_shoes, f_lower, f_upper, f_hair, f_face, male=False)
