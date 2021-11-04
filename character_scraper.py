@@ -78,14 +78,8 @@ def get_asset(skin_tone1, skin_tone2, shoe, lower_body, upper_body, hair_style, 
         with open(f"character_resources/female/{name}", "wb") as f:
             f.write(response.content)
 
-# Fix a broken asset
-def fix_asset(save_name):
-    # Update to match corresponding file, where numbers = index
-    get_asset(st1r[0], st2r[0], m_shoes[2], m_lower[1], m_upper[1], m_hair[3], m_face[0], emotes[3], save_name)
-# fix_asset("male_skin0_hair3_black_face0_shoes2_lower1_upper1_emote3.gif") # Example
-
 if __name__ == "__main__":
     # Male assets
-    # get_assets(st1r, st2r, m_shoes, m_lower, m_upper, m_hair, m_face)
+    get_assets(st1r, st2r, m_shoes, m_lower, m_upper, m_hair, m_face)
     # Female assets
     get_assets(st1r, st2r, f_shoes, f_lower, f_upper, f_hair, f_face, male=False)
