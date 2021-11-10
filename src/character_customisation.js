@@ -28,6 +28,8 @@ const shoesRange = 3;
 
 const genderPaths = {"male": "../character_resources/male/", "female": "../character_resources/female/"};
 const hairColours = ["black", "brown", "blonde"];
+const defaultMale = "../character_resources/male/male_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"
+const defaultFemale = "../character_resources/female/female_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"
 
 // Grab the current path of the character then extract just the name
 function getCharacterName() {
@@ -84,8 +86,14 @@ function cycleValue(part, direction) {
 }
 // Event handlers
 genderButton.onclick = function () {
-    if (genderButton.innerText == "Male") genderButton.innerText = "Female";
-    else genderButton.innerText = "Male";
+    if (genderButton.innerText == "Male") {
+        genderButton.innerText = "Female";
+        characterImage.src = defaultFemale;
+    }
+    else {
+        genderButton.innerText = "Male";
+        characterImage.src = defaultMale;
+    }
 }
 faceLeft.onclick = function () {
     cycleValue("face", "left");
