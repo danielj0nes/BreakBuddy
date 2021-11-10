@@ -54,7 +54,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "^8.0.0",
+    "electron": "^12.0.0",
     "electron-rebuild": "^3.2.5"
   },
   "iohook": {
@@ -67,7 +67,7 @@
       "darwin"
     ],
     "targets": [
-      "electron-76"
+      "electron-87"
     ]
   }
 }
