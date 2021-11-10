@@ -1,5 +1,12 @@
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
+const ioHook = require('iohook');
+
+ioHook.on("keyup", event => {
+   console.log(event); // {keychar: 'f', keycode: 19, rawcode: 15, type: 'keup'}
+});
+
+ioHook.start();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require

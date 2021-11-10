@@ -16,6 +16,8 @@ const bottomLeft = document.getElementById("bottom-left");
 const bottomRight = document.getElementById("bottom-right");
 const shoesLeft = document.getElementById("shoes-left");
 const shoesRight = document.getElementById("shoes-right");
+const characterUserName = document.getElementById("character-username");
+
 // Ranges are static for now, see README.md
 const faceRange = 3;
 const maleHairRange = 4;

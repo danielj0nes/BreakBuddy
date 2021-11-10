@@ -45,7 +45,8 @@
     }
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "iohook": "^0.9.3"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
@@ -53,6 +54,20 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "15.3.0"
+    "electron": "^8.0.0",
+    "electron-rebuild": "^3.2.5"
+  },
+  "iohook": {
+    "arches": [
+      "x64",
+      "ia32"
+    ],
+    "platforms": [
+      "win32",
+      "darwin"
+    ],
+    "targets": [
+      "electron-76"
+    ]
   }
 }

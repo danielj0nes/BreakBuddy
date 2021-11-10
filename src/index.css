@@ -3,6 +3,7 @@ body {
   margin: auto;
   max-width: 38rem;
   padding: 2rem;
+  background-color: white;
 }
 
 #character-image {
@@ -10,3 +11,4 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+
