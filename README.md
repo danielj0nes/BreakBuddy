@@ -23,5 +23,6 @@ The character cycles between different facial expressions and animations (gradua
 * If you need to rebuild the assets, please use the `get_assets` function, though note that a strong connection is required
 
 ## Electron app - Development guide
-First clone the project and unzip both the `male.zip` and `female.zip` files. Now run `npm install` to obtain `node_modules`. Finally, run `npm start` to build the project. If you make changes, simply write `rs` in the console to recompile the changes.
+First clone the project and unzip both the `male.zip` and `female.zip` files. Run `npm install` to obtain `node_modules`. Finally, run `npm start` to build the project. If you make changes, simply write `rs` in the console to recompile the changes.
 
+To compile the app into an executable program from a given instance, run the command `npm run make`

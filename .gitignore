@@ -1,5 +1,6 @@
 character_resources/male/*
 character_resources/female/*
+out/
 
 # Logs
 logs

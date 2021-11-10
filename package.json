@@ -2,7 +2,7 @@
   "name": "breakbuddy",
   "productName": "breakbuddy",
   "version": "1.0.0",
-  "description": "My Electron application description",
+  "description": "Break Buddy is a personalised cross-platform break reminder utility",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
