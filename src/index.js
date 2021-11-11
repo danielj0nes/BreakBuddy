@@ -7,8 +7,7 @@ const Store = require('electron-store');
 Store.initRenderer();
 
 // Start logging functionality
-// const logger = new Logger();
-// Data persistance
+const logger = new Logger();
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -26,12 +25,21 @@ const createWindow = () => {
       contextIsolation: false
     }
   });
-  // and load the index.html of the app.
+  /*
+  const secondWindow = new BrowserWindow({
+    maximizable: false,
+    frame: false,
+    transparent: true,
+    alwaysOnTop: true,
+    hasShadow: false,
+    resizable: false
+   });
+  // Load windows
+  secondWindow.loadFile(path.join(__dirname, 't.html'));
+  */
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
   // Open the DevTools. Comment this out when building a distribution.
   mainWindow.webContents.openDevTools();
- 
 };
 
 // This method will be called when Electron has finished

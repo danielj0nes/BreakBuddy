@@ -38,14 +38,17 @@ const defaultMale = "../character_resources/male/male_skin0_hair0_black_face0_sh
 const defaultFemale = "../character_resources/female/female_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"
 
 // Load presets
-characterImage.src = store.get("characterPreset");
-characterUserName.value = store.get("characterName")
-genderButton.innerText = getCharacterName().split("_")[0];
+if (typeof store.get("characterName") !== "undefined") characterUserName.value = store.get("characterName");
+else characterUserName.value = "";
+if (typeof store.get("characterPreset") !== "undefined") characterImage.src = store.get("characterPreset");
+else characterImage.src = defaultMale;
+
 
 // Grab the current path of the character then extract just the name
 function getCharacterName() {
     return characterImage.src.replace(/^.*[\\\/]/, '');
 }
+genderButton.innerText = getCharacterName().split("_")[0];
 // Helper function to loop between number values given direction and range
 function cycler(direction, partNum, partRange) {
     if (direction == "left") return ((partNum - 1 % partRange) + partRange) % partRange;
@@ -151,8 +154,6 @@ shoesLeft.onclick = function () {
 shoesRight.onclick = function () {
     cycleValue("shoes", "right");
 }
-characterUserName.addEventListener("keyup", ({key}) => {
-    if (key === "Enter") {
-        store.set("characterName", characterUserName.value);
-    }
-})
+characterUserName.onblur = function () {
+    store.set("characterName", characterUserName.value);
+}
