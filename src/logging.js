@@ -1,7 +1,12 @@
 const ioHook = require('iohook');
 
-ioHook.on("keyup", event => {
-   console.log(event);
-});
+class Logger {
+    constructor() {
+        ioHook.on('keydown', (event) => {
+            console.log(event);
+        });
+        ioHook.start();
+    }
+}
 
-ioHook.start();
+module.exports = Logger;

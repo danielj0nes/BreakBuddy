@@ -1,5 +1,5 @@
-character_resources/male/*
-character_resources/female/*
+character_resources/*
+character_resources/*
 out/
 
 # Logs

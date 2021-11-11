@@ -1,12 +1,14 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, ipcRenderer} = require('electron');
+
 const path = require('path');
-const ioHook = require('iohook');
+const Logger = require('./logging.js');
+const Store = require('electron-store');
 
-ioHook.on("keyup", event => {
-   console.log(event); // {keychar: 'f', keycode: 19, rawcode: 15, type: 'keup'}
-});
+Store.initRenderer();
 
-ioHook.start();
+// Start logging functionality
+// const logger = new Logger();
+// Data persistance
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -20,14 +22,16 @@ const createWindow = () => {
     height: 900,
     webPreferences: {
       nodeIntegration: true,
+      // Remove this if loading external content
+      contextIsolation: false
     }
   });
-
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
-  // Open the DevTools.
+  // Open the DevTools. Comment this out when building a distribution.
   mainWindow.webContents.openDevTools();
+ 
 };
 
 // This method will be called when Electron has finished
@@ -51,6 +55,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.

@@ -1,7 +1,11 @@
 // Character customisation core functionality
+const Store = require("electron-store");
+const store = new Store();
+
 // Grab elements from the customisation page
 let characterImage = document.getElementById("character-image");
-const genderButton = document.getElementById("gender-change");
+let characterUserName = document.getElementById("character-username");
+let genderButton = document.getElementById("gender-change");
 const faceLeft = document.getElementById("face-left");
 const faceRight = document.getElementById("face-right");
 const hairLeft = document.getElementById("hair-left");
@@ -16,7 +20,7 @@ const bottomLeft = document.getElementById("bottom-left");
 const bottomRight = document.getElementById("bottom-right");
 const shoesLeft = document.getElementById("shoes-left");
 const shoesRight = document.getElementById("shoes-right");
-const characterUserName = document.getElementById("character-username");
+
 
 // Ranges are static for now, see README.md
 const faceRange = 3;
@@ -32,6 +36,11 @@ const genderPaths = {"male": "../character_resources/male/", "female": "../chara
 const hairColours = ["black", "brown", "blonde"];
 const defaultMale = "../character_resources/male/male_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"
 const defaultFemale = "../character_resources/female/female_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"
+
+// Load presets
+characterImage.src = store.get("characterPreset");
+characterUserName.value = store.get("characterName")
+genderButton.innerText = getCharacterName().split("_")[0];
 
 // Grab the current path of the character then extract just the name
 function getCharacterName() {
@@ -83,19 +92,22 @@ function cycleValue(part, direction) {
         case "shoes":
             shoesNum = cycler(direction, shoesNum, shoesRange);
             characterImage.src = genderPaths[characterGender] + characterName.replace(/shoes[0-9]/, "shoes" + shoesNum);
-            break; 
+            break;
     }
+    // Save the character layout
+    store.set("characterPreset", characterImage.src);
 }
 // Event handlers
 genderButton.onclick = function () {
-    if (genderButton.innerText == "Male") {
-        genderButton.innerText = "Female";
-        characterImage.src = defaultFemale;
-    }
-    else {
-        genderButton.innerText = "Male";
+    if (genderButton.innerText == "female") {
+        genderButton.innerText = "male";
         characterImage.src = defaultMale;
     }
+    else {
+        genderButton.innerText = "female";
+        characterImage.src = defaultFemale;
+    }
+    store.set("characterPreset", characterImage.src);
 }
 faceLeft.onclick = function () {
     cycleValue("face", "left");
@@ -139,3 +151,8 @@ shoesLeft.onclick = function () {
 shoesRight.onclick = function () {
     cycleValue("shoes", "right");
 }
+characterUserName.addEventListener("keyup", ({key}) => {
+    if (key === "Enter") {
+        store.set("characterName", characterUserName.value);
+    }
+})
