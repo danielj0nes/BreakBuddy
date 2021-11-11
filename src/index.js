@@ -1,13 +1,15 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer} = require('electron');
-
+const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron');
+const electron = require("electron");
 const path = require('path');
 const Logger = require('./logging.js');
 const Store = require('electron-store');
+
 
 Store.initRenderer();
 
 // Start logging functionality
 const logger = new Logger();
+
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -15,7 +17,8 @@ if (require('electron-squirrel-startup')) { // eslint-disable-line global-requir
 }
 
 const createWindow = () => {
-  // Create the browser window.
+  const screenElectron = electron.screen.getPrimaryDisplay().size;
+  // console.log(screenElectron)
   const mainWindow = new BrowserWindow({
     width: 900,
     height: 900,
@@ -25,19 +28,25 @@ const createWindow = () => {
       contextIsolation: false
     }
   });
-  /*
   const secondWindow = new BrowserWindow({
+    width: 75,
+    height: 75,
     maximizable: false,
     frame: false,
     transparent: true,
     alwaysOnTop: true,
     hasShadow: false,
-    resizable: false
+    resizable: false,
+    x: screenElectron.width - 100,
+    y: screenElectron.height - 200,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false
+    }
    });
   // Load windows
-  secondWindow.loadFile(path.join(__dirname, 't.html'));
-  */
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
+  secondWindow.loadFile(path.join(__dirname, 'character_display.html'));
   // Open the DevTools. Comment this out when building a distribution.
   mainWindow.webContents.openDevTools();
 };

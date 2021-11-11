@@ -6,14 +6,14 @@ BreakBuddy allows the user to create and customise an animated character that re
 The character cycles between different facial expressions and animations (gradually increasing from lower to higher intrusiveness), which represent the time elapsed until a break should be taken. The break interval timer can be flexibly set by the user (default 60 minutes).  
 
 ## To do
-* Finish character customisation functionality
-* Work on displaying the character outside of the tool
 * Work on break timers functionality
 * Tracking behaviour, such as resetting the interval timer when no activity is detected after `x` amount of time.
 
 ## Done
 * Parse character resources via `character_scraper.py`
+* Finish character customisation functionality
 * Started Electron app development - user can cycle between character hair type and hair colour. This functionality is shown in `render.js`.
+* Work on displaying the character outside of the tool
 
 ## character_scraper.py
 * This file builds requests to iteratively create and save animated characters - used within the app for character customisation

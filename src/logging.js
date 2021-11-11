@@ -2,12 +2,18 @@ const ioHook = require("iohook");
 
 class Logger {
     constructor() {
+        let afkTimer;
         ioHook.on("keydown", (event) => {
-            console.log(`Key pressed: ${String.fromCharCode(event.rawcode)}`);
+            clearTimeout(afkTimer);
+            afkTimer = setTimeout(() => {console.log("No event for 3m, user is AFK")}, 180000);
+            // To do: add functionality to reset break timer
+            
         });
         ioHook.on("mousemove", (event) => {
-            // console.log("Mouse moved");
+            clearTimeout(afkTimer);
+            afkTimer = setTimeout(() => {console.log("No event for 3m, user is AFK")}, 180000);
         });
+
         ioHook.start();
     }
 }
