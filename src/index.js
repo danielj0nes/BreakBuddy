@@ -8,7 +8,8 @@ Store.initRenderer();
 
 const logger = new Logger();
 
-const iconName = "breakbuddy_tray_icon.png"
+const iconName = "breakbuddy_tray_icon.png";
+let tray;
 
 // Restore character creation window from tray icon
 function openFromContext() {
@@ -19,8 +20,9 @@ function openFromContext() {
 
 // Tray icon context menu
 const contextMenu = Menu.buildFromTemplate([
-  {click: () => openFromContext(), label: "Customise Character"}
-])
+  {click: () => openFromContext(), label: "Customise Character"},
+  {click: () => BrowserWindow.getAllWindows()[0].close(), label: "Close"}
+]);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) { // eslint-disable-line global-require
@@ -57,6 +59,7 @@ const createBreakBuddyWindow = () => {
     alwaysOnTop: true,
     hasShadow: false,
     resizable: false,
+    skipTaskbar: true,
     x: screenElectron.width - 100,
     y: screenElectron.height - 200,
     icon: path.join(__dirname, `assets/${iconName}`),

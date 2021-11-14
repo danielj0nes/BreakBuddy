@@ -5,15 +5,18 @@ BreakBuddy allows the user to create and customise an animated character that re
 
 The character cycles between different facial expressions and animations (gradually increasing from lower to higher intrusiveness), which represent the time elapsed until a break should be taken. The break interval timer can be flexibly set by the user (default 60 minutes).  
 
-## To do
+## To do / in progress
 * Work on break timers functionality
-* Tracking behaviour, such as resetting the interval timer when no activity is detected after `x` amount of time.
+* Tracking behaviour in conjunction with timers
+* CSS theme for character creation screen
+* Build on intrusiveness levels e.g., what happens after `x` minutes
 
 ## Done
 * Parse character resources via `character_scraper.py`
-* Finish character customisation functionality
-* Started Electron app development - user can cycle between character hair type and hair colour. This functionality is shown in `render.js`.
-* Work on displaying the character outside of the tool
+* Character customisation functionality and complete character personalisation screen
+* Character is displayed outside of the tool when activated
+* Input logging (for timer resets)
+* Tray icon display - for when the Break Buddy is active, character creation can be re-opened via tray icon
 
 ## character_scraper.py
 * This file builds requests to iteratively create and save animated characters - used within the app for character customisation
@@ -25,6 +28,6 @@ The character cycles between different facial expressions and animations (gradua
 ## Electron app - Development guide
 First clone the project and unzip both the `male.zip` and `female.zip` files. Run `npm install` to obtain `node_modules`. Finally, run `npm start` to build the project. If you make changes, simply write `rs` in the console to recompile the changes.
 
-To compile the app into an executable program from a given instance, run the command `npm run make`
+To compile the app into an executable program from a given instance, run the command `npm run make` - this will take a while.
 
-Local cache is stored at `C:\Users\<username>\AppData\Roaming\breakbuddy` on Windows, `/Users/<username>/Library/Application Support/breakbuddy/Cache` on OS X, and `/home/<username>/.config/breakbuddy/Cache` on Linux. You can completely wipe the folder to reset the app to the installation state.
+Local cache is stored at `C:\Users\<username>\AppData\Roaming\breakbuddy` on Windows, `/Users/<username>/Library/Application Support/breakbuddy/Cache` on OS X, and `/home/<username>/.config/breakbuddy/Cache` on Linux. You can completely wipe the folder to reset the app to the installation state (e.g., when you need to test data persistance).
