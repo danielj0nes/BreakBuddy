@@ -16,6 +16,6 @@ class Logger {
 
         ioHook.start();
     }
+   
 }
-
-module.exports = Logger;
+module.exports = Logger
