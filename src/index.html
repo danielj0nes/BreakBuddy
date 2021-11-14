@@ -11,8 +11,13 @@
   <body>
     <h1>Customise your Break Buddy</h1>
     <input type="text" id="character-username" maxlength="20" placeholder="Break Buddy">
+    <div id="break-time-div">
+      <p>Time before break</p>
+      <input type="range" id="break-time-slider" min="20" max="120" value="60" class="slider" oninput="this.nextElementSibling.value = this.value">
+      <output>60</output> minutes
+    </div>
     <image id="character-image" src="../character_resources/male/male_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"></image>
-
+    <p>Gender</p>
     <button id="gender-change" class="character-customise-button">male</button>
     <p>Face</p>
     <button id="face-left" class="character-customise-button"><-</button>

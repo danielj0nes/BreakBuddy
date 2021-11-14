@@ -2,16 +2,23 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: auto;
   max-width: 38rem;
-  padding: 2rem;
+  padding: 0.5rem;
   background-color: white;
 }
 
 #character-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  position: absolute;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 #breakbuddy-start {
+  float: right;
+}
+
+#break-time-div {
   float: right;
 }
