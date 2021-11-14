@@ -11,12 +11,3 @@ const defaultFemale = "../character_resources/female/female_skin0_hair0_black_fa
 // Load presets
 if (typeof store.get("characterPreset") !== "undefined") characterImage.src = store.get("characterPreset");
 else characterImage.src = defaultMale;
-
-let windowTopBar = document.createElement('div')
-windowTopBar.style.width = "100%"
-windowTopBar.style.height = "20px"
-windowTopBar.style.backgroundColor = "transparent"
-windowTopBar.style.position = "absolute"
-windowTopBar.style.top = windowTopBar.style.left = 0
-windowTopBar.style.webkitAppRegion = "drag"
-document.body.appendChild(windowTopBar)

@@ -1,11 +1,13 @@
 // Character customisation core functionality
 const Store = require("electron-store");
+const ipcRenderer = require("electron").ipcRenderer;
 const store = new Store();
 
 // Grab elements from the customisation page
 let characterImage = document.getElementById("character-image");
 let characterUserName = document.getElementById("character-username");
 let genderButton = document.getElementById("gender-change");
+const breakBuddyStart = document.getElementById("breakbuddy-start");
 const faceLeft = document.getElementById("face-left");
 const faceRight = document.getElementById("face-right");
 const hairLeft = document.getElementById("hair-left");
@@ -156,4 +158,7 @@ shoesRight.onclick = function () {
 }
 characterUserName.onblur = function () {
     store.set("characterName", characterUserName.value);
+}
+breakBuddyStart.onclick = function () {
+    ipcRenderer.send("startBreakbuddy", "start");
 }
