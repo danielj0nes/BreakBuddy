@@ -1,14 +1,15 @@
 const { app, BrowserWindow, ipcMain, Tray, Menu } = require("electron");
 const electron = require("electron");
 const path = require("path");
-const Logger = require("./logging.js");
 const Store = require("electron-store");
+const ioHook = require("iohook");
 
 Store.initRenderer();
 
-const logger = new Logger();
 const iconName = "breakbuddy_tray_icon.png";
 let tray;
+let stopTimer;
+let breakTime = 180000; // 3 minutes
 
 // Restore character creation window from tray icon
 function openFromContext() {
@@ -50,8 +51,8 @@ const createBreakBuddyWindow = () => {
     // console.log(screenElectron)
     const screenElectron = electron.screen.getPrimaryDisplay().size;
     const breakBuddyWindow = new BrowserWindow({
-        width: 75,
-        height: 75,
+        width: 90,
+        height: 90,
         maximizable: false,
         frame: false,
         transparent: true,
@@ -68,6 +69,7 @@ const createBreakBuddyWindow = () => {
         }
     });
     breakBuddyWindow.loadFile(path.join(__dirname, "character_display.html"));
+    //breakBuddyWindow.webContents.openDevTools();
 };
 
 // Listen for the start break buddy button press event
@@ -79,6 +81,16 @@ ipcMain.on("startBreakbuddy", function (evt, message) {
         tray.setToolTip("BreakBuddy");
         tray.setContextMenu(contextMenu);
         BrowserWindow.getAllWindows()[1].close();
+        // Start logging movements to track idle time (i.e., if break taken)
+        ioHook.on("mousemove", (ev) => {
+            clearTimeout(stopTimer);
+            stopTimer = setTimeout(() => {BrowserWindow.getAllWindows()[0].webContents.send("stopTimer");}, breakTime);
+        });
+        ioHook.on("keydown", (ev) => {
+            clearTimeout(stopTimer);
+            stopTimer = setTimeout(() => {BrowserWindow.getAllWindows()[0].webContents.send("stopTimer");}, breakTime);
+        });
+        ioHook.start();
     }
 });
 

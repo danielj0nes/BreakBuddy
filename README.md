@@ -6,10 +6,9 @@ BreakBuddy allows the user to create and customise an animated character that re
 The character cycles between different facial expressions and animations (gradually increasing from lower to higher intrusiveness), which represent the time elapsed until a break should be taken. The break interval timer can be flexibly set by the user (default 60 minutes).  
 
 ## To do / in progress
-* Work on break timers functionality
-* Tracking behaviour in conjunction with timers
 * CSS theme for character creation screen
-* Build on intrusiveness levels e.g., what happens after `x` minutes
+* Build on intrusiveness levels e.g., what happens after `x` minutes - resize the character? Move it around unwillingly?
+* What happens after the user set break timer is passed? Reset or just hold it until a break is taken?
 
 ## Done
 * Parse character resources via `character_scraper.py`
@@ -17,6 +16,7 @@ The character cycles between different facial expressions and animations (gradua
 * Character is displayed outside of the tool when activated
 * Input logging (for timer resets)
 * Tray icon display - for when the Break Buddy is active, character creation can be re-opened via tray icon
+* Complete timer functionality - user can select a break timer `(20m - 120m)`, the character will gradually become more intrusive as time passes (changing emotions / transparency). If the user is away for `3m`, the timer will reset.
 
 ## character_scraper.py
 * This file builds requests to iteratively create and save animated characters - used within the app for character customisation
