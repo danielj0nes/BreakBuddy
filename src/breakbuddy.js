@@ -42,6 +42,7 @@ ipcRenderer.on("stopTimer", () => {
     characterImage.style.opacity = 0.7;
     characterOpacity = 0.7;
     clearInterval(timerId);
+    // Possible alternative for mac?
     if (confirm("You took a break so the timer has restarted :-)")) timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
     else timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
 });
