@@ -49,22 +49,20 @@ else characterImage.src = defaultMale;
 if (typeof store.get("breakTime") !== "undefined") {
     breakTimeValue.value = store.get("breakTime");
     breakTimeOutput.value = store.get("breakTime");
-
 } else {
     breakTimeValue.value = "60";
     breakTimeOutput.value = "60";
 }
-
 // Grab the current path of the character then extract just the name
 function getCharacterName() {
     return characterImage.src.replace(/^.*[\\/]/, "");
-}
+};
 genderButton.innerText = getCharacterName().split("_")[0];
 // Helper function to loop between number values given direction and range
 function cycler(direction, partNum, partRange) {
     if (direction == "left") return ((partNum - 1 % partRange) + partRange) % partRange;
     else return (partNum + 1) % partRange;
-}
+};
 // Map buttons to cycle between character animations
 function cycleValue(part, direction) {
     const characterName = getCharacterName();
@@ -109,7 +107,7 @@ function cycleValue(part, direction) {
         break;
     }
     store.set("characterPreset", characterImage.src);
-}
+};
 // Event handlers
 genderButton.onclick = function () {
     if (genderButton.innerText == "female") {
