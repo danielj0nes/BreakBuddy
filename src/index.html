@@ -3,44 +3,71 @@
   <head>
     <meta charset="UTF-8">
     <title>BreakBuddy Character Customisation</title>
-    <link
-    rel="stylesheet"
-    href="index.css">
+    <link rel="stylesheet" href="index.css">
     <script defer src="character_customisation.js"></script>
   </head>
   <body>
-    <h1>Customise your BreakBuddy</h1>
-    <input type="text" id="character-username" maxlength="20" placeholder="Break Buddy">
-    <div id="break-time-div">
-      <p>Time before break</p>
-      <input type="range" id="break-time-value" min="20" max="120" class="slider" oninput="this.nextElementSibling.value = this.value">
-      <output id="break-time-output"></output> minutes
+    <h1>Customise your Break Buddy</h1>
+    <div class="box-wrapper">
+      <div id ="box0">
+        <div id="box1">
+          <div class="btn-group">
+            <input type="text" id="character-username" maxlength="20" placeholder="Name your Break Buddy">
+            <p>Gender</p>
+            <button id="gender-change" class="character-customise-button"></button>
+            <p>
+              <button id="face-left" class="character-customise-button"> <a href="#" class="previous">&laquo;</a></button>
+              Face
+              <button id="face-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p>
+            <p>
+              <button id="hair-colour-left" class="character-customise-button"><a href="#" class="previous">&laquo;</a></button>
+              Hair Colour
+              <button id="hair-colour-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p>
+            <p>
+              <button id="hair-left" class="character-customise-button"><a href="#" class="previous">&laquo;</a></button>
+              Hair Style
+              <button id="hair-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p>
+            <p>
+              <button id="skin-left" class="character-customise-button"><a href="#" class="previous">&laquo;</a></button>
+              Skin
+              <button id="skin-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p> 
+            <p>
+              <button id="top-left" class="character-customise-button"><a href="#" class="previous">&laquo;</a></button>
+              Top
+              <button id="top-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p>
+            <p>
+              <button id="bottom-left" class="character-customise-button"><a href="#" class="previous">&laquo;</a></button>
+              Bottom
+              <button id="bottom-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p>
+            <p>
+              <button id="shoes-left" class="character-customise-button"> <a href="#" class="previous">&laquo;</a></button>
+              Shoes
+              <button id="shoes-right" class="character-customise-button"><a href="#" class="next">&raquo;</a></button>
+            </p>
+          </div>
+      </div>
+      <div id="box2">
+        <div id="box4">
+          <image id="character-image" src="../character_resources/male/male_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"></image>
+        </div>
+        <div id="box3">
+          <div id="break-time-div">
+            <p>Time before break</p>
+            <input type="range" id="break-time-value" min="20" max="99" class="slider" oninput="this.nextElementSibling.value = this.value">
+            <output id="break-time-output"></output> minutes
+          </div>
+          <div class="btn-group">
+            <button id="breakbuddy-start" class="character-customise-button">Start BreakBuddy</button>
+          </div>
+        </div>
+      </div>
     </div>
-    <image id="character-image" src="../character_resources/male/male_skin0_hair0_black_face0_shoes0_lower0_upper0_emote0.gif"></image>
-    <p>Gender</p>
-    <button id="gender-change" class="character-customise-button">male</button>
-    <p>Face</p>
-    <button id="face-left" class="character-customise-button"><-</button>
-    <button id="face-right" class="character-customise-button">-></button>
-    <p>Hair Colour</p>
-    <button id="hair-colour-left" class="character-customise-button"><-</button>
-    <button id="hair-colour-right" class="character-customise-button">-></button>
-    <p>Hair</p>
-    <button id="hair-left" class="character-customise-button"><-</button>
-    <button id="hair-right" class="character-customise-button">-></button>
-    <p>Skin</p>
-    <button id="skin-left" class="character-customise-button"><-</button>
-    <button id="skin-right" class="character-customise-button">-></button>
-    <p>Top</p>
-    <button id="top-left" class="character-customise-button"><-</button>
-    <button id="top-right" class="character-customise-button">-></button>
-    <p>Bottom</p>
-    <button id="bottom-left" class="character-customise-button"><-</button>
-    <button id="bottom-right" class="character-customise-button">-></button>
-    <p>Shoes</p>
-    <button id="shoes-left" class="character-customise-button"><-</button>
-    <button id="shoes-right" class="character-customise-button">-></button>
-    <button id="breakbuddy-start" class="character-customise-button">Start BreakBuddy</button>
   </body>
   
 </html>

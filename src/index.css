@@ -1,24 +1,97 @@
 body {
+  background-color:lightblue;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  margin: auto;
-  max-width: 38rem;
+  margin: 10px;
   padding: 0.5rem;
-  background-color: white;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  font-size: 20px;
+}
+
+#character-username {
+  margin-top: 20px;
 }
 
 #character-image {
-  position: absolute;
-  top:0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  top: 50px;
+  left: 180px;
   margin: auto;
+  width: 200px;
+  height: auto;
 }
 
 #breakbuddy-start {
-  float: right;
+  float: left;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 30px;
 }
 
 #break-time-div {
-  float: right;
+  padding-left: 30px;
 }
+
+#break-time-value{
+  text-align: center;
+}
+.box-wrapper {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+}
+
+#box0 {
+  padding: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  height: 80%;
+  width: auto;
+}
+
+#box1 {
+  flex-grow: 1;
+  text-align: center;
+}
+
+#box2 {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+#box3 {
+  flex-grow: 1;
+  padding-left: 180px;
+}
+
+#box4 {
+  flex-grow: 1;
+  height: 500px;
+}
+
+.btn-group button {
+  display: block; /* Make the buttons appear below each other */
+  padding: 5px;
+  border-radius: 40px;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
+
+.btn-group button:not(:last-child) {
+  border-bottom: none; /* Prevent double borders */
+}
+
+a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+  
+}
+
