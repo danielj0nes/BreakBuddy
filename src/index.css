@@ -1,40 +1,46 @@
 body {
-  background-image: url("background.jpg");
+  background-color:lightblue;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   margin: 10px;
-  /* max-width: 30rem; */
   padding: 0.5rem;
-  background-color: white;
   background-attachment: fixed;
   background-repeat: no-repeat;
   overflow: hidden;
+  font-size: 20px;
 }
 
+#character-username {
+  margin-top: 20px;
+}
 
 #character-image {
   position: relative;
-  top:50px;
-  left: 200px;
+  top: 50px;
+  left: 180px;
   margin: auto;
   width: 200px;
   height: auto;
 }
 
 #breakbuddy-start {
-  float: right;
+  float: left;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  margin-left: 30px;
 }
 
 #break-time-div {
-  float: right;
+  padding-left: 30px;
 }
 
-
+#break-time-value{
+  text-align: center;
+}
 .box-wrapper {
   height: 100vh;
   width: 100vw;
   display: flex;
   flex-direction: row;
-  
 }
 
 #box0 {
@@ -42,14 +48,12 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  border: solid 1px white;
   height: 80%;
   width: auto;
 }
 
 #box1 {
   flex-grow: 1;
-  border: solid 1px black;
   text-align: center;
 }
 
@@ -57,30 +61,22 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  border: solid 1px black;
 }
 
 #box3 {
   flex-grow: 1;
-  border: solid 1px orange;
-  text-align: center;
+  padding-left: 180px;
 }
 
 #box4 {
   flex-grow: 1;
-  border: solid 1px red;
-}
-
-#box5 {
-  flex-grow: 1;
-  border: solid 1px blue;
-  align-items: center;
+  height: 500px;
 }
 
 .btn-group button {
   display: block; /* Make the buttons appear below each other */
   padding: 5px;
-  border-radius: 2px;
+  border-radius: 40px;
   border: none;
   text-align: center;
   text-decoration: none;
@@ -96,9 +92,6 @@ a {
   text-decoration: none;
   display: inline-block;
   padding: 8px 16px;
-}
-
-a:hover {
-  background-color: green;
+  
 }
 
