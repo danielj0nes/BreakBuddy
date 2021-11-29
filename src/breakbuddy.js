@@ -1,7 +1,7 @@
 // Character customisation core functionality
 const Store = require("electron-store");
 const ipcRenderer = require("electron").ipcRenderer;
-
+const dialog = require("electron");
 const store = new Store();
 const emoteRange = 3;
 const defaultOpacity = 0.4;
