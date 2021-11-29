@@ -5,7 +5,7 @@ const ipcRenderer = require("electron").ipcRenderer;
 const store = new Store();
 const emoteRange = 3;
 const defaultOpacity = 0.4;
-const timeMultiplier = 60000;
+const timeMultiplier = 6000;
 let nuisanceNotification;
 // Starting opacity of the character image
 let characterOpacity = 0.4;
@@ -22,6 +22,11 @@ const defaultHeight = characterImage.style.height;
 // Getters
 function getCharacterName() {
     return characterImage.src.replace(/^.*[\\/]/, "");
+}
+// Fix OSX bug
+function osxConfirm() {
+    if (window.confirm("You took a break so the timer has restarted :-)")) timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
+    else timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
 }
 
 // Change the character image to the next emote in order and update the opacity (from less to more)
@@ -68,6 +73,5 @@ ipcRenderer.on("stopTimer", () => {
     clearInterval(nuisanceNotification);
     clearInterval(timerId);
     // Possible alternative for mac...?
-    if (confirm("You took a break so the timer has restarted :-)")) timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
-    else timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
+    setTimeout(osxConfirm(), 500);
 });
