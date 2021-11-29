@@ -8,7 +8,7 @@
     "appId": "breakbuddy",
     "win": {
       "target": "NSIS",
-      "icon": "src/assets/icon.ico"
+      "icon": "src/assets/icon.png"
     }
   },
   "scripts": {
@@ -33,14 +33,14 @@
         "character_scraper.py"
       ],
       "packagerConfig": {
-        "icon": "src/assets/icon.ico"
+        "icon": "src/assets/icon.png"
       },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "BreakBuddy",
-            "icon": "src/assets/icon.ico"
+            "icon": "src/assets/icon.png"
           }
         },
         {

@@ -6,7 +6,7 @@ const ioHook = require("iohook");
 const store = new Store();
 Store.initRenderer();
 
-const iconName = "icon.ico";
+const iconName = "icon.png";
 const timeMultiplier = 60000;
 const nuisanceTimer = 2; // Minutes between character moving around
 let screenElectron;
