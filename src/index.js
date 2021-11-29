@@ -85,8 +85,7 @@ ipcMain.on("startBreakbuddy", function (evt, message) {
         tray = new Tray(iconPath);
         tray.setToolTip("BreakBuddy");
         tray.setContextMenu(contextMenu);
-        if (process.platform == "darwin") console.log("Check")
-        else BrowserWindow.getAllWindows()[1].close();
+        BrowserWindow.getAllWindows()[1].close();
         
         // Start logging movements to track idle time (i.e., if break taken)
         // This doesn't work on certain applications (so far only LoL client...)
