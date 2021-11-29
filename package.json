@@ -1,9 +1,16 @@
 {
-  "name": "breakbuddy",
-  "productName": "breakbuddy",
+  "name": "BreakBuddy",
+  "productName": "BreakBuddy",
   "version": "1.0.0",
   "description": "Break Buddy is a personalised cross-platform break reminder utility",
   "main": "src/index.js",
+  "build": {
+    "appId": "breakbuddy",
+    "win": {
+      "target": "NSIS",
+      "icon": "src/assets/icon.ico"
+    }
+  },
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
@@ -19,12 +26,21 @@
   "license": "MIT",
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "ignore": [
+        ".gitignore",
+        ".eslintrc.js",
+        "README.md",
+        "character_scraper.py"
+      ],
+      "packagerConfig": {
+        "icon": "src/assets/icon.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "breakbuddy"
+            "name": "BreakBuddy",
+            "icon": "src/assets/icon.ico"
           }
         },
         {

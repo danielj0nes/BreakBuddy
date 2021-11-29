@@ -3,13 +3,18 @@ const electron = require("electron");
 const path = require("path");
 const Store = require("electron-store");
 const ioHook = require("iohook");
-
+const store = new Store();
 Store.initRenderer();
 
-const iconName = "breakbuddy_tray_icon.png";
+const iconName = "icon.ico";
+const timeMultiplier = 60000;
+const nuisanceTimer = 2; // Minutes between character moving around
+let screenElectron;
 let tray;
 let stopTimer;
-let breakTime = 180000; // 3 minutes
+let nuisanceInterval;
+let bbWidth = 90;
+let bbHeight = 90;
 
 // Restore character creation window from tray icon
 function openFromContext() {
@@ -49,10 +54,9 @@ const createWindow = () => {
 // Main BreakBuddy character display window
 const createBreakBuddyWindow = () => {
     // console.log(screenElectron)
-    const screenElectron = electron.screen.getPrimaryDisplay().size;
     const breakBuddyWindow = new BrowserWindow({
-        width: 90,
-        height: 90,
+        width: bbWidth,
+        height: bbHeight,
         maximizable: false,
         frame: false,
         transparent: true,
@@ -60,8 +64,8 @@ const createBreakBuddyWindow = () => {
         hasShadow: false,
         resizable: false,
         skipTaskbar: true,
-        x: screenElectron.width - 100,
-        y: screenElectron.height - 200,
+        x: screenElectron.width - 200,
+        y: screenElectron.height - 300,
         icon: path.join(__dirname, `assets/${iconName}`),
         webPreferences: {
             nodeIntegration: true,
@@ -69,12 +73,13 @@ const createBreakBuddyWindow = () => {
         }
     });
     breakBuddyWindow.loadFile(path.join(__dirname, "character_display.html"));
-    //breakBuddyWindow.webContents.openDevTools();
+    // breakBuddyWindow.webContents.openDevTools();
 };
 
 // Listen for the start break buddy button press event
 ipcMain.on("startBreakbuddy", function (evt, message) {
     if (message == "start") {
+        let breakDuration = store.get("breakDuration") * timeMultiplier;
         createBreakBuddyWindow();
         const iconPath = path.join(__dirname, `assets/${iconName}`);
         tray = new Tray(iconPath);
@@ -82,16 +87,30 @@ ipcMain.on("startBreakbuddy", function (evt, message) {
         tray.setContextMenu(contextMenu);
         BrowserWindow.getAllWindows()[1].close();
         // Start logging movements to track idle time (i.e., if break taken)
-        // This doesn't work on certain applications, so far only LoL client
+        // This doesn't work on certain applications (so far only LoL client...)
         ioHook.on("mousemove", (ev) => {
             clearTimeout(stopTimer);
-            stopTimer = setTimeout(() => {BrowserWindow.getAllWindows()[0].webContents.send("stopTimer");}, breakTime);
+            stopTimer = setTimeout(() => {BrowserWindow.getAllWindows()[0].webContents.send("stopTimer");}, breakDuration);
         });
         ioHook.on("keydown", (ev) => {
             clearTimeout(stopTimer);
-            stopTimer = setTimeout(() => {BrowserWindow.getAllWindows()[0].webContents.send("stopTimer");}, breakTime);
+            stopTimer = setTimeout(() => {BrowserWindow.getAllWindows()[0].webContents.send("stopTimer");}, breakDuration);
         });
         ioHook.start();
+    }
+});
+
+ipcMain.on("nuisance", function (evt, message) {
+    if (message == "start") {
+        nuisanceInterval = setInterval(() => {
+            let randBBX = Math.floor(Math.random() * (screenElectron.width - 200));
+            let randBBY = Math.floor(Math.random() * (screenElectron.height - 200));
+            BrowserWindow.getAllWindows()[0].setPosition(randBBX, randBBY);
+            // To do: convert this to a chat bubble from the character
+        }, timeMultiplier * nuisanceTimer);
+    }
+    if (message == "stop") {
+        clearInterval(nuisanceInterval);
     }
 });
 
@@ -99,6 +118,7 @@ ipcMain.on("startBreakbuddy", function (evt, message) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", () => {
+    screenElectron = electron.screen.getPrimaryDisplay().size;
     createWindow();
 });
 

@@ -20,7 +20,7 @@ body {
   top: 50px;
   left: 180px;
   margin: auto;
-  width: 200px;
+  width: 125px;
   height: auto;
 }
 
@@ -31,7 +31,7 @@ body {
   margin-left: 13px;
 }
 
-#break-time-div {
+#break-time-div, #break-duration-div {
   padding-left: 30px;
 }
 
@@ -73,6 +73,11 @@ body {
 #box4 {
   flex-grow: 1;
   height: 500px;
+}
+
+#box5 {
+  flex-grow: 1;
+  padding-left: 180px;
 }
 
 .btn-group button {

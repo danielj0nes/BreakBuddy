@@ -9,6 +9,8 @@ let characterUserName = document.getElementById("character-username");
 let genderButton = document.getElementById("gender-change");
 let breakTimeValue = document.getElementById("break-time-value");
 let breakTimeOutput = document.getElementById("break-time-output");
+let breakDurationValue = document.getElementById("break-duration-value");
+let breakDurationOutput = document.getElementById("break-duration-output");
 const breakBuddyStart = document.getElementById("breakbuddy-start");
 const faceLeft = document.getElementById("face-left");
 const faceRight = document.getElementById("face-right");
@@ -52,6 +54,13 @@ if (typeof store.get("breakTime") !== "undefined") {
 } else {
     breakTimeValue.value = "60";
     breakTimeOutput.value = "60";
+}
+if (typeof store.get("breakDuration") !== "undefined") {
+    breakDurationValue.value = store.get("breakDuration");
+    breakDurationOutput.value = store.get("breakDuration");
+} else {
+    breakDurationValue.value = "3";
+    breakDurationOutput.value = "3";
 }
 // Grab the current path of the character then extract just the name
 function getCharacterName() {
@@ -167,5 +176,6 @@ characterUserName.onblur = function () {
 };
 breakBuddyStart.onclick = function () {
     store.set("breakTime", breakTimeValue.value);
+    store.set("breakDuration", breakDurationValue.value);
     ipcRenderer.send("startBreakbuddy", "start");
 };
