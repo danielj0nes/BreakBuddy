@@ -45,7 +45,7 @@ const defaultFemale = "../character_resources/female/female_skin0_hair0_black_fa
 
 // Load presets
 if (typeof store.get("characterName") !== "undefined") characterUserName.value = store.get("characterName");
-else characterUserName.value = "";
+else characterUserName.value = "BreakBuddy";
 if (typeof store.get("characterPreset") !== "undefined") characterImage.src = store.get("characterPreset");
 else characterImage.src = defaultMale;
 if (typeof store.get("breakTime") !== "undefined") {
@@ -175,6 +175,7 @@ characterUserName.onblur = function () {
     store.set("characterName", characterUserName.value);
 };
 breakBuddyStart.onclick = function () {
+    store.set("characterPreset", characterImage.src);
     store.set("breakTime", breakTimeValue.value);
     store.set("breakDuration", breakDurationValue.value);
     ipcRenderer.send("startBreakbuddy", "start");
