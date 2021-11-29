@@ -43,7 +43,7 @@ function emoteCycle(range) {
         nuisanceNotification = setInterval(() => {
             new Notification(characterUserName, {
                 body: "Time for a break?",
-                icon: "assets/icon.ico"
+                icon: "assets/icon.png"
             });
         }, timeMultiplier * 2);
     } else {
