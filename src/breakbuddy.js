@@ -5,7 +5,7 @@ const ipcRenderer = require("electron").ipcRenderer;
 const store = new Store();
 const emoteRange = 3;
 const defaultOpacity = 0.4;
-const timeMultiplier = 6000;
+const timeMultiplier = 60000;
 let nuisanceNotification;
 // Starting opacity of the character image
 let characterOpacity = 0.4;
