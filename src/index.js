@@ -26,7 +26,8 @@ function openFromContext() {
 // Tray icon context menu
 const contextMenu = Menu.buildFromTemplate([
     {click: () => openFromContext(), label: "Customise Character"},
-    {click: () => BrowserWindow.getAllWindows()[0].close(), label: "Close"}
+    {click: () => BrowserWindow.getAllWindows()[0].close(), label: "Close"},
+    {click: () => BrowserWindow.getAllWindows()[0].webContents.send("resetTimer"), label: "Reset timer"}
 ]);
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.

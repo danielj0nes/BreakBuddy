@@ -28,6 +28,18 @@ function osxConfirm() {
     if (window.confirm("You took a break so the timer has restarted :-)")) timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
     else timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
 }
+// Reset timer functionality
+function resetTimer(timerFlag) {
+    ipcRenderer.send("nuisance", "stop");
+    characterImage.src = characterImage.src.replace(/emote[0-9]/, "emote" + 0);
+    characterImage.style.opacity = defaultOpacity;
+    characterOpacity = defaultOpacity;
+    characterImage.style.height = defaultHeight;
+    characterSize = 100;
+    clearInterval(nuisanceNotification);
+    clearInterval(timerId);
+    if (timerFlag) timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
+}
 
 // Change the character image to the next emote in order and update the opacity (from less to more)
 function emoteCycle(range) {
@@ -43,7 +55,7 @@ function emoteCycle(range) {
         nuisanceNotification = setInterval(() => {
             new Notification(characterUserName, {
                 body: "Time for a break?",
-                icon: "assets/icon.ico"
+                icon: "assets/icon.png"
             });
         }, timeMultiplier * 2);
     } else {
@@ -63,15 +75,11 @@ let timerId = setInterval(emoteCycle, intervalBreakTime, emoteRange);
 
 // Receive the AFK event - occurs after the break duration timer is met
 ipcRenderer.on("stopTimer", () => {
-    // Reset character state and opacity back to default and restart timer
-    ipcRenderer.send("nuisance", "stop");
-    characterImage.src = characterImage.src.replace(/emote[0-9]/, "emote" + 0);
-    characterImage.style.opacity = defaultOpacity;
-    characterOpacity = defaultOpacity;
-    characterImage.style.height = defaultHeight;
-    characterSize = 100;
-    clearInterval(nuisanceNotification);
-    clearInterval(timerId);
-    // Possible alternative for mac...?
+    resetTimer();
     setTimeout(osxConfirm(), 500);
+});
+
+// Receive the reset event
+ipcRenderer.on("resetTimer", () => {
+    resetTimer(true);
 });
