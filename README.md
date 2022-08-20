@@ -5,6 +5,8 @@ BreakBuddy allows the user to create and customise an animated character that re
 
 The character cycles between different facial expressions and animations (gradually increasing from lower to higher intrusiveness), which represent the time elapsed until a break should be taken. The break interval timer can be flexibly set by the user (default 60 minutes)
 
+Consider (skim-)reading **Breakbuddy.pdf** for detailed information, which includes demonstrations, architectural decisions, and references
+
 ## To do / in progress
 * Extend and improve intrusiveness functionality - currently the intrusiveness just involves increasing size, transparency, a simple taskbar notification, and moving the character around
 * Improve the taskbar notification - use different messages
